@@ -11,9 +11,7 @@ export default defineConfig(async () => {
       runtimeErrorOverlay(),
       ...(process.env.NODE_ENV !== "production" &&
       process.env.REPL_ID !== undefined
-        ? [
-            (await import("@replit/vite-plugin-cartographer")).cartographer(),
-          ]
+        ? [(await import("@replit/vite-plugin-cartographer")).cartographer()]
         : []),
     ],
     resolve: {
@@ -27,6 +25,11 @@ export default defineConfig(async () => {
     build: {
       outDir: path.resolve(import.meta.dirname, "dist/public"),
       emptyOutDir: true,
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, "client/index.html"),
+        },
+      },
     },
     server: {
       fs: {
