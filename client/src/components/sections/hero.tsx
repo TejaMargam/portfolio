@@ -51,14 +51,14 @@ export default function Hero() {
           <Button 
             variant="outline"
             onClick={() => scrollToSection('#projects')}
-            className="border-slate-600 hover:border-indigo-400 hover:bg-indigo-400/10 px-8 py-3 font-medium text-slate-100 hover:text-indigo-400"
+            className="border-slate-600 hover:border-indigo-400 hover:bg-indigo-400/10 bg-transparent px-8 py-3 font-medium text-slate-100 hover:text-indigo-400"
           >
             View Projects
           </Button>
           <Button 
             variant="outline"
             onClick={downloadResume}
-            className="border-cyan-400 hover:border-cyan-400 hover:bg-cyan-400/10 px-8 py-3 font-medium text-slate-100 hover:text-cyan-400"
+            className="border-cyan-400 hover:border-cyan-400 hover:bg-cyan-400/10 bg-transparent px-8 py-3 font-medium text-slate-100 hover:text-cyan-400"
           >
             <i className="fas fa-download mr-2"></i>Resume
           </Button>
