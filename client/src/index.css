@@ -71,6 +71,16 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Ensure all headings have proper contrast on dark backgrounds */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-slate-100;
+  }
+  
+  /* Default text color for cards and content */
+  .glass-effect h1, .glass-effect h2, .glass-effect h3, .glass-effect h4, .glass-effect h5, .glass-effect h6 {
+    @apply text-slate-100;
+  }
 }
 
 @layer utilities {

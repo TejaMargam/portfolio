@@ -62,7 +62,7 @@ export default function Skills() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <i className={`${category.icon} ${category.color} text-2xl mr-3`}></i>
-                  <h3 className="text-xl font-semibold">{category.title}</h3>
+                  <h3 className="text-xl font-semibold text-slate-100">{category.title}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (

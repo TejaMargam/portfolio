@@ -78,7 +78,7 @@ export default function Projects() {
                   <div className={`w-12 h-12 ${project.bgColor} rounded-lg flex items-center justify-center mr-4`}>
                     <i className={`${project.icon} ${project.iconColor} text-xl`}></i>
                   </div>
-                  <h3 className="text-xl font-bold">{project.title}</h3>
+                  <h3 className="text-xl font-bold text-slate-100">{project.title}</h3>
                 </div>
                 <p className="text-slate-300 mb-6">
                   {project.description}
@@ -108,7 +108,7 @@ export default function Projects() {
                 <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mr-4">
                   <i className="fas fa-bell text-amber-400 text-xl"></i>
                 </div>
-                <h3 className="text-xl font-bold">Alarm Control & Messaging App</h3>
+                <h3 className="text-xl font-bold text-slate-100">Alarm Control & Messaging App</h3>
               </div>
               <p className="text-slate-300 mb-6">
                 Interactive UI for alarm control with dynamic icon updates and counter logic. Comprehensive alarm lifecycle management with backend state synchronization through MQTT/WebSocket events.

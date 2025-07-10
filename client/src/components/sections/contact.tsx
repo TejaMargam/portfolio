@@ -120,7 +120,7 @@ export default function Contact() {
                     href="https://www.linkedin.com/in/vishwa-margam-1b0479213" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="block w-full text-center border border-cyan-400 px-6 py-3 rounded-lg hover:border-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 font-medium"
+                    className="block w-full text-center border border-cyan-400 px-6 py-3 rounded-lg hover:border-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 font-medium text-slate-100 hover:text-cyan-400"
                   >
                     <i className="fab fa-linkedin mr-2"></i>Connect on LinkedIn
                   </a>
