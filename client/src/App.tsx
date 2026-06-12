@@ -20,7 +20,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <WouterRouter base="">
+        <WouterRouter base={import.meta.env.PROD ? "/portfolio" : "/"}>
           <Router />
         </WouterRouter>
       </TooltipProvider>

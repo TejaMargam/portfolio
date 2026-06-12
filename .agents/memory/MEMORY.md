@@ -1,0 +1,1 @@
+- [Vite dev server fix](vite-dev-server-fix.md) — defineConfig(async fn) returns a function not object; never spread viteConfig in createViteServer; process.exit(1) causes crash loops.

@@ -4,13 +4,13 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig(async () => {
+  const isDev = process.env.NODE_ENV !== "production";
   return {
-    base: "", // 🔧 This is the critical fix
+    base: isDev ? "/" : "/portfolio/",
     plugins: [
       react(),
       runtimeErrorOverlay(),
-      ...(process.env.NODE_ENV !== "production" &&
-      process.env.REPL_ID !== undefined
+      ...(isDev && process.env.REPL_ID !== undefined
         ? [(await import("@replit/vite-plugin-cartographer")).cartographer()]
         : []),
     ],
@@ -27,7 +27,7 @@ export default defineConfig(async () => {
       emptyOutDir: true,
       rollupOptions: {
         input: {
-          main: path.resolve(__dirname, "client/index.html"),
+          main: path.resolve(import.meta.dirname, "client/index.html"),
         },
       },
     },
