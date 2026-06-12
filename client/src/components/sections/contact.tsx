@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useMutation } from "@tanstack/react-query";
+
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbw4U6GCo-uCY9sFEUEQmxpEWCxIftnCJkcKazF_N4DBbXIRUy3ZaAdfpbfpT_GIGbln/exec";
 
 export default function Contact() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
@@ -10,17 +12,23 @@ export default function Contact() {
   const { ref: rightRef, isVisible: rightVisible } = useScrollReveal();
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+        }),
+      });
     },
     onSuccess: () => {
       toast({ title: "Message sent!", description: "I'll get back to you soon." });
       setFormData({ name: "", email: "", subject: "", message: "" });
-      queryClient.invalidateQueries({ queryKey: ["/api/contacts"] });
     },
     onError: () => {
       toast({ title: "Error", description: "Failed to send. Please try again.", variant: "destructive" });
