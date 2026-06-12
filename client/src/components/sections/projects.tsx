@@ -1,131 +1,124 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+
+const projects = [
+  {
+    title: "Unified Host Application",
+    subtitle: "Multi-Device Dashboard",
+    icon: "fas fa-th-large",
+    color: "text-blue-400",
+    border: "border-blue-500/20",
+    bg: "bg-blue-500/8",
+    tags: ["Electron.js", "Webpack Module Federation", "React.js", "Redux"],
+    description: "Plugin-based host desktop app that consolidates multiple standalone device monitoring applications into one interface without merging codebases. Each app is a self-contained Webpack plugin with configurable live chart slots for simultaneous multi-device monitoring.",
+    highlights: ["Plugin architecture", "Module Federation", "Configurable slots", "Multi-device monitoring"],
+  },
+  {
+    title: "Radioactivity Spectrum Analyzer",
+    subtitle: "Scientific Signal Processing",
+    icon: "fas fa-radiation-alt",
+    color: "text-emerald-400",
+    border: "border-emerald-500/20",
+    bg: "bg-emerald-500/8",
+    tags: ["Python", "NumPy", "SciPy", "Node.js", "Electron.js", "MQTT"],
+    description: "Desktop applications for gamma spectrum analysis — converting raw detector channel counts to energy values via user-defined calibration. Implements Python-based Gaussian smoothing, FWHM computation, peak energy identification, and PySerial data acquisition over USB.",
+    highlights: ["Gaussian smoothing", "FWHM computation", "Peak identification", "USB serial acquisition"],
+  },
+  {
+    title: "Modular IoT Framework",
+    subtitle: "Skeleton Platform Architecture",
+    icon: "fas fa-cubes",
+    color: "text-violet-400",
+    border: "border-violet-500/20",
+    bg: "bg-violet-500/8",
+    tags: ["Node.js", "React.js", "Redux", "MQTT", "WebSockets", "MySQL"],
+    description: "Reusable skeleton framework separating shared platform infrastructure from application-specific business logic. Pre-built modules for API routing, WebSocket server, MQTT handling, Redux store, and database query layers — enabling 10+ apps on one maintainable foundation.",
+    highlights: ["Reusable template", "Pre-built modules", "Separation of concerns", "10+ apps built"],
+  },
+  {
+    title: "React Native Mobile Suite",
+    subtitle: "IoT Field Monitoring Apps",
+    icon: "fas fa-mobile-alt",
+    color: "text-amber-400",
+    border: "border-amber-500/20",
+    bg: "bg-amber-500/8",
+    tags: ["React Native", "Redux", "MQTT", "SQLite", "MySQL", "ESP32 OTA"],
+    description: "6+ mobile applications for field use mirroring desktop capabilities: live charts, MQTT ingestion, local SQLite storage, PDF/Excel reports, RSA licensing, and ESP32 OTA firmware updates with role-based access control.",
+    highlights: ["6+ mobile apps", "OTA firmware updates", "RBAC", "Offline storage"],
+  },
+];
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "HFCM Desktop App",
-      icon: "fas fa-radiation-alt",
-      iconColor: "text-indigo-400",
-      bgColor: "bg-indigo-500/20",
-      description: "Advanced radiation monitoring tool with real-time sensor input, zone-based UI, and automatic calibration features. Integrated serial communication and MQTT for hardware telemetry.",
-      technologies: [
-        { name: "Electron", color: "bg-indigo-500/20 text-indigo-400" },
-        { name: "React.js", color: "bg-violet-500/20 text-violet-400" },
-        { name: "MQTT", color: "bg-cyan-500/20 text-cyan-400" },
-        { name: "Serial Communication", color: "bg-emerald-500/20 text-emerald-400" }
-      ],
-      highlights: "Real-time monitoring • Hardware integration • Medical device standards"
-    },
-    {
-      title: "Dynamic Chart Dashboard",
-      icon: "fas fa-chart-line",
-      iconColor: "text-violet-400",
-      bgColor: "bg-violet-500/20",
-      description: "Plugin-based dashboard with isolated Redux states per chart instance. Features dynamic D3 visualizations with mode switching and performance optimization.",
-      technologies: [
-        { name: "D3.js", color: "bg-indigo-500/20 text-indigo-400" },
-        { name: "Redux Toolkit", color: "bg-violet-500/20 text-violet-400" },
-        { name: "Chart.js", color: "bg-cyan-500/20 text-cyan-400" },
-        { name: "React.js", color: "bg-emerald-500/20 text-emerald-400" }
-      ],
-      highlights: "Modular architecture • Interactive visualizations • Performance tuned"
-    },
-    {
-      title: "Secure Licensing System",
-      icon: "fas fa-shield-alt",
-      iconColor: "text-cyan-400",
-      bgColor: "bg-cyan-500/20",
-      description: "Machine-specific licensing implementation with RSA encryption and expiry validation. Features tamper-proof file storage in Electron-packaged resources.",
-      technologies: [
-        { name: "RSA Encryption", color: "bg-indigo-500/20 text-indigo-400" },
-        { name: "Electron", color: "bg-violet-500/20 text-violet-400" },
-        { name: "Node.js", color: "bg-cyan-500/20 text-cyan-400" },
-        { name: "Security", color: "bg-emerald-500/20 text-emerald-400" }
-      ],
-      highlights: "Device-bound keys • Tamper-proof • Expiry validation"
-    },
-    {
-      title: "MQTT & Serial Integration",
-      icon: "fas fa-network-wired",
-      iconColor: "text-emerald-400",
-      bgColor: "bg-emerald-500/20",
-      description: "Modular MQTT topic handlers for scalable device networks with multi-threaded logic for real-time serial communication and error recovery mechanisms.",
-      technologies: [
-        { name: "MQTT", color: "bg-indigo-500/20 text-indigo-400" },
-        { name: "Serial Communication", color: "bg-violet-500/20 text-violet-400" },
-        { name: "WebSocket", color: "bg-cyan-500/20 text-cyan-400" },
-        { name: "Multithreading", color: "bg-emerald-500/20 text-emerald-400" }
-      ],
-      highlights: "Scalable networks • Error recovery • Real-time communication"
-    }
-  ];
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   return (
-    <section id="projects" className="py-20">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 gradient-text">Featured Projects</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Showcase of key projects demonstrating expertise in real-time systems, desktop applications, and innovative solutions.
-          </p>
+    <section id="projects" className="py-24 bg-[#050d1a] relative">
+      <div className="max-w-6xl mx-auto px-6">
+        <div ref={headerRef as any} className={`mb-16 reveal-item ${headerVisible ? "revealed" : ""}`}>
+          <p className="section-label mb-3">What I've built</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">Featured Projects</h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <Card key={index} className="glass-effect border-slate-700 project-card">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  <div className={`w-12 h-12 ${project.bgColor} rounded-lg flex items-center justify-center mr-4`}>
-                    <i className={`${project.icon} ${project.iconColor} text-xl`}></i>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-100">{project.title}</h3>
+        <div ref={gridRef as any} className="grid md:grid-cols-2 gap-6">
+          {projects.map((p, i) => (
+            <div
+              key={i}
+              onClick={() => setActiveIdx(activeIdx === i ? null : i)}
+              className={`group relative p-7 rounded-3xl border ${p.border} ${p.bg} cursor-pointer hover:-translate-y-1 transition-all duration-300 reveal-item ${gridVisible ? "revealed" : ""}`}
+              style={{ transitionDelay: gridVisible ? `${i * 80}ms` : "0ms" }}
+            >
+              {/* Top row */}
+              <div className="flex items-start justify-between mb-4">
+                <div className={`w-12 h-12 rounded-2xl border ${p.border} flex items-center justify-center`}>
+                  <i className={`${p.icon} ${p.color} text-lg`} />
                 </div>
-                <p className="text-slate-300 mb-6">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex}
-                      className={`${tech.color} px-3 py-1 rounded-full text-sm`}
-                    >
-                      {tech.name}
-                    </span>
-                  ))}
+                <div
+                  className="w-8 h-8 rounded-full border border-slate-700/60 flex items-center justify-center transition-transform duration-300"
+                  style={{ transform: activeIdx === i ? "rotate(45deg)" : "rotate(0deg)" }}
+                >
+                  <i className="fas fa-plus text-slate-500 text-xs" />
                 </div>
-                <div className="text-slate-400 text-sm">
-                  <i className="fas fa-star text-amber-400 mr-2"></i>
-                  {project.highlights}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
 
-          {/* Alarm Control & Messaging App - Full Width */}
-          <Card className="glass-effect border-slate-700 project-card md:col-span-2">
-            <CardContent className="p-8">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mr-4">
-                  <i className="fas fa-bell text-amber-400 text-xl"></i>
+              <h3 className="text-lg font-bold text-slate-100 mb-0.5">{p.title}</h3>
+              <p className={`text-sm font-medium ${p.color} mb-3`}>{p.subtitle}</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-5 line-clamp-3">{p.description}</p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {p.tags.map((t, j) => (
+                  <span key={j} className="px-2.5 py-1 rounded-md bg-slate-800/70 border border-slate-700/50 text-slate-400 text-xs font-medium">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Expandable highlights */}
+              <div
+                className="overflow-hidden transition-all duration-300"
+                style={{ maxHeight: activeIdx === i ? "200px" : "0px", opacity: activeIdx === i ? 1 : 0 }}
+              >
+                <div className={`pt-4 border-t ${p.border}`}>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Key Highlights</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {p.highlights.map((h, j) => (
+                      <div key={j} className="flex items-center gap-2 text-sm text-slate-300">
+                        <i className="fas fa-check-circle text-emerald-400 text-xs" />
+                        {h}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-100">Alarm Control & Messaging App</h3>
               </div>
-              <p className="text-slate-300 mb-6">
-                Interactive UI for alarm control with dynamic icon updates and counter logic. Comprehensive alarm lifecycle management with backend state synchronization through MQTT/WebSocket events.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                <span className="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-sm">React.js</span>
-                <span className="bg-violet-500/20 text-violet-400 px-3 py-1 rounded-full text-sm">MQTT</span>
-                <span className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm">WebSocket</span>
-                <span className="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-sm">Real-time Events</span>
-                <span className="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-sm">State Management</span>
-              </div>
-              <div className="text-slate-400 text-sm">
-                <i className="fas fa-star text-amber-400 mr-2"></i>
-                Interactive UI • Lifecycle management • Real-time synchronization • Dynamic updates
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          ))}
+        </div>
+
+        <div className={`mt-10 text-center reveal-item ${gridVisible ? "revealed" : ""}`} style={{ transitionDelay: "400ms" }}>
+          <p className="text-slate-500 text-sm">Click any card to see highlights</p>
         </div>
       </div>
     </section>

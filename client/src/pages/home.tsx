@@ -1,3 +1,4 @@
+import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import Navigation from "@/components/ui/navigation";
 import Hero from "@/components/sections/hero";
 import About from "@/components/sections/about";
@@ -5,19 +6,18 @@ import Skills from "@/components/sections/skills";
 import Experience from "@/components/sections/experience";
 import Projects from "@/components/sections/projects";
 import Contact from "@/components/sections/contact";
-import { useScrollProgress } from "@/hooks/use-scroll-progress";
 
 export default function Home() {
   const scrollProgress = useScrollProgress();
 
   return (
-    <div className="bg-slate-900 text-slate-50 min-h-screen overflow-x-hidden">
-      {/* Scroll Progress Indicator */}
-      <div 
-        className="scroll-indicator" 
+    <div className="bg-[#050d1a] text-slate-100 min-h-screen overflow-x-hidden">
+      {/* Scroll progress bar */}
+      <div
+        className="scroll-indicator"
         style={{ transform: `scaleX(${scrollProgress / 100})` }}
       />
-      
+
       <Navigation />
       <Hero />
       <About />
@@ -25,25 +25,31 @@ export default function Home() {
       <Experience />
       <Projects />
       <Contact />
-      
+
       {/* Footer */}
-      <footer className="py-8 border-t border-slate-700">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-slate-400 mb-4 md:mb-0">
-              © 2024 Margam Vishwateja. All rights reserved.
-            </div>
-            <div className="flex space-x-6">
-              <a href="mailto:tejamargam.vi@gmail.com" className="text-slate-400 hover:text-indigo-400 transition-colors">
-                <i className="fas fa-envelope text-lg"></i>
+      <footer className="py-10 border-t border-slate-800/60 bg-[#050d1a]">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div>
+            <p className="text-slate-100 font-bold gradient-text">&lt;Vishwateja /&gt;</p>
+            <p className="text-slate-500 text-sm mt-1">Full Stack Developer · Hyderabad, India</p>
+          </div>
+          <p className="text-slate-600 text-sm">© 2026 Margam Vishwateja. All rights reserved.</p>
+          <div className="flex gap-4">
+            {[
+              { icon: "fas fa-envelope", href: "mailto:vishwamargam@gmail.com" },
+              { icon: "fab fa-linkedin", href: "https://www.linkedin.com/in/vishwa-margam-1b0479213" },
+              { icon: "fas fa-phone", href: "tel:+918328401939" },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-lg border border-slate-800 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:border-slate-600 hover:text-blue-400 transition-all"
+              >
+                <i className={`${item.icon} text-sm`} />
               </a>
-              <a href="https://www.linkedin.com/in/vishwa-margam-1b0479213" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors">
-                <i className="fab fa-linkedin text-lg"></i>
-              </a>
-              <a href="tel:+918328401939" className="text-slate-400 hover:text-violet-400 transition-colors">
-                <i className="fas fa-phone text-lg"></i>
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </footer>
