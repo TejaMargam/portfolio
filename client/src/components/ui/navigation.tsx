@@ -39,7 +39,7 @@ export default function Navigation() {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#050d1a]/90 backdrop-blur-xl border-b border-blue-500/10"
+            ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-red-500/10"
             : "bg-transparent"
         }`}
         style={{ animation: "slideDown 0.6s ease forwards" }}
@@ -60,8 +60,8 @@ export default function Navigation() {
                   onClick={() => scrollTo(link.href)}
                   className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                     activeSection === link.href
-                      ? "text-blue-400 bg-blue-500/10 border border-blue-500/20"
-                      : "text-slate-400 hover:text-slate-100 hover:bg-white/5"
+                      ? "text-red-400 bg-red-500/10 border border-red-500/20"
+                      : "text-neutral-400 hover:text-neutral-100 hover:bg-white/5"
                   }`}
                 >
                   {link.label}
@@ -69,14 +69,14 @@ export default function Navigation() {
               ))}
               <button
                 onClick={() => scrollTo("contact")}
-                className="ml-4 px-4 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
+                className="ml-4 px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-500 text-white rounded-lg transition-colors"
               >
                 Hire Me
               </button>
             </div>
 
             <button
-              className="md:hidden text-slate-300 hover:text-white p-2"
+              className="md:hidden text-neutral-300 hover:text-white p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <div className="w-5 space-y-1.5">
@@ -100,7 +100,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 bg-[#050d1a]/97 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-6 transition-all duration-300 ${
+        className={`fixed inset-0 z-40 bg-[#0a0a0a]/97 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-6 transition-all duration-300 ${
           isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -108,7 +108,7 @@ export default function Navigation() {
           <button
             key={link.href}
             onClick={() => scrollTo(link.href)}
-            className="text-2xl font-semibold text-slate-300 hover:text-blue-400 transition-colors"
+            className="text-2xl font-semibold text-neutral-300 hover:text-red-400 transition-colors"
             style={{
               transitionDelay: isMenuOpen ? `${i * 60}ms` : "0ms",
               transform: isMenuOpen ? "translateX(0)" : "translateX(-20px)",
@@ -121,7 +121,7 @@ export default function Navigation() {
         ))}
         <button
           onClick={() => scrollTo("contact")}
-          className="mt-4 px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl"
+          className="mt-4 px-8 py-3 bg-red-600 text-white font-semibold rounded-xl"
         >
           Hire Me
         </button>

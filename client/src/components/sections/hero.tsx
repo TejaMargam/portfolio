@@ -51,48 +51,48 @@ export default function Hero() {
   };
 
   const stats = [
-    { value: "2+", label: "Years Experience", color: "text-blue-400" },
-    { value: "10+", label: "Desktop Apps", color: "text-emerald-400" },
-    { value: "6+", label: "Mobile Apps", color: "text-violet-400" },
-    { value: "20+", label: "Technologies", color: "text-amber-400" },
+    { value: "2+", label: "Years Experience", color: "text-red-400" },
+    { value: "10+", label: "Desktop Apps", color: "text-rose-400" },
+    { value: "6+", label: "Mobile Apps", color: "text-red-400" },
+    { value: "20+", label: "Technologies", color: "text-red-400" },
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050d1a] dot-grid">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a] dot-grid">
       {/* Ambient blobs */}
       <div className="mesh-gradient" />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-600/8 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-emerald-600/5 rounded-full blur-[80px]" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-red-600/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-red-600/8 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-rose-600/5 rounded-full blur-[80px]" />
       </div>
 
       {/* Floating 3D shapes */}
-      <div className="absolute top-28 left-12 w-14 h-14 border border-blue-500/20 rounded-xl float-shape cube-3d" style={{ animationDuration: "8s" }} />
-      <div className="absolute top-40 right-16 w-10 h-10 border border-emerald-500/20 rounded-full float-shape" style={{ animationDuration: "6s", animationDelay: "1s" }} />
-      <div className="absolute bottom-36 left-24 w-6 h-6 bg-violet-500/20 rounded-full float-shape" style={{ animationDuration: "10s", animationDelay: "2s" }} />
-      <div className="absolute bottom-48 right-20 w-12 h-12 border border-blue-400/15 rotate-45 float-shape cube-3d" style={{ animationDuration: "9s", animationDelay: "0.5s" }} />
+      <div className="absolute top-28 left-12 w-14 h-14 border border-red-500/20 rounded-xl float-shape cube-3d" style={{ animationDuration: "8s" }} />
+      <div className="absolute top-40 right-16 w-10 h-10 border border-rose-500/20 rounded-full float-shape" style={{ animationDuration: "6s", animationDelay: "1s" }} />
+      <div className="absolute bottom-36 left-24 w-6 h-6 bg-red-500/20 rounded-full float-shape" style={{ animationDuration: "10s", animationDelay: "2s" }} />
+      <div className="absolute bottom-48 right-20 w-12 h-12 border border-red-400/15 rotate-45 float-shape cube-3d" style={{ animationDuration: "9s", animationDelay: "0.5s" }} />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Availability badge */}
-        <div className={`shimmer-border inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "100ms" }}>
-          <span className="w-2 h-2 bg-emerald-400 rounded-full pulse-glow" />
+        <div className={`shimmer-border inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-red-500/20 bg-red-500/5 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "100ms" }}>
+          <span className="w-2 h-2 bg-rose-400 rounded-full pulse-glow" />
           <span className="section-label">Available for opportunities</span>
         </div>
 
         {/* Name */}
-        <h1 className={`text-3d text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 text-slate-100 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "200ms" }}>
+        <h1 className={`text-3d text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 text-neutral-100 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "200ms" }}>
           Margam <span className="gradient-text">Vishwateja</span>
         </h1>
 
         {/* Typewriter */}
-        <div className={`text-xl md:text-2xl font-mono text-blue-400 mb-6 h-8 flex items-center justify-center gap-1 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "300ms" }}>
+        <div className={`text-xl md:text-2xl font-mono text-red-400 mb-6 h-8 flex items-center justify-center gap-1 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "300ms" }}>
           <span>{displayed}</span>
-          <span className="cursor-blink text-blue-300">|</span>
+          <span className="cursor-blink text-red-300">|</span>
         </div>
 
         {/* Tagline */}
-        <p className={`text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed mb-10 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "400ms" }}>
+        <p className={`text-neutral-400 text-lg max-w-2xl mx-auto leading-relaxed mb-10 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "400ms" }}>
           Building production-grade IoT platforms, desktop applications, and real-time data pipelines
           across the MERN stack — from embedded hardware to user-facing dashboards.
         </p>
@@ -101,19 +101,19 @@ export default function Hero() {
         <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 reveal-item ${mounted ? "revealed" : ""}`} style={{ transitionDelay: "500ms" }}>
           <button
             onClick={() => scrollTo("contact")}
-            className="btn-3d px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-base"
+            className="btn-3d px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-xl text-base"
           >
             Get In Touch
           </button>
           <button
             onClick={() => scrollTo("projects")}
-            className="btn-3d px-8 py-3.5 bg-transparent border border-slate-600 hover:border-blue-500 hover:bg-blue-500/8 text-slate-100 font-semibold rounded-xl text-base"
+            className="btn-3d px-8 py-3.5 bg-transparent border border-neutral-600 hover:border-red-500 hover:bg-red-500/8 text-neutral-100 font-semibold rounded-xl text-base"
           >
             View Projects
           </button>
           <button
             onClick={downloadResume}
-            className="btn-3d px-8 py-3.5 bg-transparent border border-emerald-500/50 hover:border-emerald-400 hover:bg-emerald-500/8 text-emerald-400 font-semibold rounded-xl text-base flex items-center gap-2"
+            className="btn-3d px-8 py-3.5 bg-transparent border border-rose-500/50 hover:border-rose-400 hover:bg-rose-500/8 text-rose-400 font-semibold rounded-xl text-base flex items-center gap-2"
           >
             <i className="fas fa-download text-sm" />
             Resume
@@ -139,7 +139,7 @@ export default function Hero() {
             >
               <div className="tilt-card-content">
                 <div className={`text-3xl font-bold mb-1 ${s.color}`}>{s.value}</div>
-                <div className="text-xs text-slate-500 font-medium">{s.label}</div>
+                <div className="text-xs text-neutral-500 font-medium">{s.label}</div>
               </div>
             </div>
           ))}
@@ -148,8 +148,8 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="w-6 h-10 rounded-full border-2 border-slate-700 flex items-start justify-center pt-2 scroll-wheel">
-          <div className="w-1 h-2 bg-blue-400 rounded-full" />
+        <div className="w-6 h-10 rounded-full border-2 border-neutral-700 flex items-start justify-center pt-2 scroll-wheel">
+          <div className="w-1 h-2 bg-red-400 rounded-full" />
         </div>
       </div>
     </section>

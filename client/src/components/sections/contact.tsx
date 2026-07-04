@@ -70,7 +70,7 @@ export default function Contact() {
   };
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl bg-slate-800/60 border border-slate-700/60 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500/60 focus:bg-slate-800 transition-all text-sm";
+    "w-full px-4 py-3 rounded-xl bg-neutral-800/60 border border-neutral-700/60 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-red-500/60 focus:bg-neutral-800 transition-all text-sm";
 
   const contactItems = [
     {
@@ -78,44 +78,44 @@ export default function Contact() {
       label: "Email",
       value: "vishwamargam@gmail.com",
       href: "mailto:vishwamargam@gmail.com",
-      color: "text-blue-400",
+      color: "text-red-400",
     },
     {
       icon: "fas fa-phone",
       label: "Phone",
       value: "+91 8328401939",
       href: "tel:+918328401939",
-      color: "text-emerald-400",
+      color: "text-rose-400",
     },
     {
       icon: "fab fa-linkedin",
       label: "LinkedIn",
       value: "vishwa-margam-1b0479213",
       href: "https://www.linkedin.com/in/vishwa-margam-1b0479213",
-      color: "text-blue-300",
+      color: "text-red-300",
     },
     {
       icon: "fas fa-map-marker-alt",
       label: "Location",
       value: "Hyderabad, India",
       href: undefined,
-      color: "text-violet-400",
+      color: "text-red-400",
     },
   ];
 
   return (
-    <section id="contact" className="py-24 bg-[#060e1e] relative">
+    <section id="contact" className="py-24 bg-[#0d0d0d] relative">
       <div className="max-w-6xl mx-auto px-6">
         <div
           ref={headerRef as any}
           className={`mb-16 reveal-item ${headerVisible ? "revealed" : ""}`}
         >
           <p className="section-label mb-3">Let's connect</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-100 mb-4">
             Get In Touch
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full" />
-          <p className="text-slate-400 mt-6 max-w-xl">
+          <div className="w-16 h-1 bg-gradient-to-r from-red-500 to-rose-400 rounded-full" />
+          <p className="text-neutral-400 mt-6 max-w-xl">
             Ready to collaborate on innovative projects or discuss opportunities
             in full-stack development, IoT platforms, and desktop applications.
           </p>
@@ -130,13 +130,13 @@ export default function Contact() {
             {contactItems.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 p-4 rounded-2xl border border-slate-800/80 bg-slate-900/30 hover:border-slate-700/60 hover:translate-x-1 transition-all duration-200"
+                className="flex items-center gap-4 p-4 rounded-2xl border border-neutral-800/80 bg-neutral-900/30 hover:border-neutral-700/60 hover:translate-x-1 transition-all duration-200"
               >
-                <div className="w-10 h-10 rounded-xl bg-slate-800/60 border border-slate-700/50 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-neutral-800/60 border border-neutral-700/50 flex items-center justify-center shrink-0">
                   <i className={`${item.icon} ${item.color} text-sm`} />
                 </div>
                 <div>
-                  <p className="text-slate-500 text-xs font-medium mb-0.5">
+                  <p className="text-neutral-500 text-xs font-medium mb-0.5">
                     {item.label}
                   </p>
                   {item.href ? (
@@ -146,12 +146,12 @@ export default function Contact() {
                         item.href.startsWith("http") ? "_blank" : undefined
                       }
                       rel="noopener noreferrer"
-                      className="text-slate-200 text-sm hover:text-white transition-colors"
+                      className="text-neutral-200 text-sm hover:text-white transition-colors"
                     >
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-slate-200 text-sm">{item.value}</p>
+                    <p className="text-neutral-200 text-sm">{item.value}</p>
                   )}
                 </div>
               </div>
@@ -160,7 +160,7 @@ export default function Contact() {
             <div className="pt-2 space-y-3">
               <button
                 onClick={downloadResume}
-                className="w-full py-3 px-5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-colors hover:-translate-y-0.5 duration-200"
+                className="w-full py-3 px-5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-colors hover:-translate-y-0.5 duration-200"
               >
                 <i className="fas fa-download" />
                 Download Resume
@@ -169,7 +169,7 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/vishwa-margam-1b0479213"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-5 rounded-xl border border-blue-500/30 bg-blue-500/8 text-blue-400 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-blue-500/15 transition-colors"
+                className="w-full py-3 px-5 rounded-xl border border-red-500/30 bg-red-500/8 text-red-400 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-red-500/15 transition-colors"
               >
                 <i className="fab fa-linkedin" />
                 Connect on LinkedIn
@@ -183,8 +183,8 @@ export default function Contact() {
             className={`lg:col-span-3 reveal-item ${rightVisible ? "revealed" : ""}`}
             style={{ transitionDelay: "100ms" }}
           >
-            <div className="p-8 rounded-3xl border border-slate-800/80 bg-slate-900/40">
-              <h3 className="text-xl font-bold text-slate-100 mb-6">
+            <div className="p-8 rounded-3xl border border-neutral-800/80 bg-neutral-900/40">
+              <h3 className="text-xl font-bold text-neutral-100 mb-6">
                 Send a Message
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -236,7 +236,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={contactMutation.isPending}
-                  className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] hover:-translate-y-0.5"
+                  className="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] hover:-translate-y-0.5"
                 >
                   {contactMutation.isPending ? (
                     <>

@@ -11,7 +11,7 @@ export default function Home() {
   const scrollProgress = useScrollProgress();
 
   return (
-    <div className="bg-[#050d1a] text-slate-100 min-h-screen overflow-x-hidden">
+    <div className="bg-[#0a0a0a] text-neutral-100 min-h-screen overflow-x-hidden">
       {/* Scroll progress bar */}
       <div
         className="scroll-indicator"
@@ -27,13 +27,13 @@ export default function Home() {
       <Contact />
 
       {/* Footer */}
-      <footer className="py-10 border-t border-slate-800/60 bg-[#050d1a]">
+      <footer className="py-10 border-t border-neutral-800/60 bg-[#0a0a0a]">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
-            <p className="text-slate-100 font-bold gradient-text">&lt;Vishwateja /&gt;</p>
-            <p className="text-slate-500 text-sm mt-1">Full Stack Developer · Hyderabad, India</p>
+            <p className="text-neutral-100 font-bold gradient-text">&lt;Vishwateja /&gt;</p>
+            <p className="text-neutral-500 text-sm mt-1">Full Stack Developer · Hyderabad, India</p>
           </div>
-          <p className="text-slate-600 text-sm">© 2026 Margam Vishwateja. All rights reserved.</p>
+          <p className="text-neutral-600 text-sm">© 2026 Margam Vishwateja. All rights reserved.</p>
           <div className="flex gap-4">
             {[
               { icon: "fas fa-envelope", href: "mailto:vishwamargam@gmail.com" },
@@ -45,7 +45,7 @@ export default function Home() {
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg border border-slate-800 bg-slate-900/60 flex items-center justify-center text-slate-400 hover:border-slate-600 hover:text-blue-400 transition-all"
+                className="w-9 h-9 rounded-lg border border-neutral-800 bg-neutral-900/60 flex items-center justify-center text-neutral-400 hover:border-neutral-600 hover:text-red-400 transition-all"
               >
                 <i className={`${item.icon} text-sm`} />
               </a>
