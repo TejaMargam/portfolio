@@ -1,4 +1,5 @@
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { useTilt } from "@/hooks/use-tilt";
 
 const highlights = [
   { icon: "fas fa-microchip", color: "text-blue-400", border: "border-blue-500/20", bg: "bg-blue-500/8", label: "IoT Platforms", desc: "MQTT, WebSockets, ESP32 OTA, real-time sensor pipelines" },
@@ -6,6 +7,30 @@ const highlights = [
   { icon: "fas fa-mobile-alt", color: "text-violet-400", border: "border-violet-500/20", bg: "bg-violet-500/8", label: "Mobile Apps", desc: "6+ React Native apps for field instruments" },
   { icon: "fas fa-shield-alt", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/8", label: "Security", desc: "RSA licensing, JWT auth, RBAC across all platforms" },
 ];
+
+function HighlightCard({ h, i }: { h: (typeof highlights)[number]; i: number }) {
+  const { ref, onMouseMove, onMouseLeave } = useTilt(10);
+
+  return (
+    <div className="perspective-container">
+      <div
+        ref={ref}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className={`tilt-card p-5 rounded-2xl border ${h.border} ${h.bg} cursor-default`}
+        style={{ transitionDelay: `${i * 60}ms` }}
+      >
+        <div className="tilt-card-content">
+          <div className={`icon-3d w-10 h-10 rounded-xl border ${h.border} flex items-center justify-center mb-3`}>
+            <i className={`${h.icon} ${h.color} text-lg`} />
+          </div>
+          <h4 className="text-slate-100 font-semibold mb-1">{h.label}</h4>
+          <p className="text-slate-500 text-sm leading-relaxed">{h.desc}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
@@ -23,7 +48,7 @@ export default function About() {
         {/* Header */}
         <div ref={headerRef as any} className={`mb-16 reveal-item ${headerVisible ? "revealed" : ""}`}>
           <p className="section-label mb-3">Who I am</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">About Me</h2>
+          <h2 className="text-3d text-4xl md:text-5xl font-bold text-slate-100 mb-4">About Me</h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full" />
         </div>
 
@@ -66,25 +91,15 @@ export default function About() {
           {/* Right – highlight cards */}
           <div ref={cardsRef as any} className={`grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-item ${cardsVisible ? "revealed" : ""}`}>
             {highlights.map((h, i) => (
-              <div
-                key={i}
-                className={`p-5 rounded-2xl border ${h.border} ${h.bg} hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-default`}
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <div className={`w-10 h-10 rounded-xl border ${h.border} flex items-center justify-center mb-3`}>
-                  <i className={`${h.icon} ${h.color} text-lg`} />
-                </div>
-                <h4 className="text-slate-100 font-semibold mb-1">{h.label}</h4>
-                <p className="text-slate-500 text-sm leading-relaxed">{h.desc}</p>
-              </div>
+              <HighlightCard key={i} h={h} i={i} />
             ))}
           </div>
         </div>
 
         {/* Education */}
         <div ref={eduRef as any} className={`mt-14 reveal-item ${eduVisible ? "revealed" : ""}`}>
-          <div className="p-6 rounded-2xl border border-slate-800/80 bg-slate-900/30 flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shrink-0">
+          <div className="glass-panel p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="icon-3d w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shrink-0">
               <i className="fas fa-graduation-cap text-violet-400 text-lg" />
             </div>
             <div className="flex-1">

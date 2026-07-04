@@ -1,4 +1,5 @@
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { useTilt } from "@/hooks/use-tilt";
 
 const skillCategories = [
   {
@@ -67,43 +68,58 @@ const skillCategories = [
   },
 ];
 
+function SkillCard({ cat, i, gridVisible }: { cat: (typeof skillCategories)[number]; i: number; gridVisible: boolean }) {
+  const { ref, onMouseMove, onMouseLeave } = useTilt(10);
+
+  return (
+    <div className="perspective-container">
+      <div
+        ref={ref}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className={`tilt-card p-5 rounded-2xl border ${cat.border} ${cat.bg} backdrop-blur-sm cursor-default reveal-item ${gridVisible ? "revealed" : ""}`}
+        style={{ transitionDelay: gridVisible ? `${i * 50}ms` : "0ms" }}
+      >
+        <div className="tilt-card-content">
+          <div className="flex items-center gap-3 mb-4">
+            <div className={`icon-3d w-9 h-9 rounded-lg border ${cat.border} flex items-center justify-center`}>
+              <i className={`${cat.icon} ${cat.color} text-sm`} />
+            </div>
+            <h3 className={`font-semibold text-sm ${cat.color}`}>{cat.title}</h3>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {cat.skills.map((skill, j) => (
+              <span
+                key={j}
+                className="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 text-xs font-medium hover:text-slate-100 hover:border-slate-500 transition-colors"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Skills() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
 
   return (
-    <section id="skills" className="py-24 bg-[#050d1a] relative">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="skills" className="py-24 bg-[#050d1a] relative overflow-hidden">
+      <div className="mesh-gradient" />
+      <div className="max-w-6xl mx-auto px-6 relative">
         <div ref={headerRef as any} className={`mb-16 reveal-item ${headerVisible ? "revealed" : ""}`}>
           <p className="section-label mb-3">What I use</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">Technical Skills</h2>
+          <h2 className="text-3d text-4xl md:text-5xl font-bold text-slate-100 mb-4">Technical Skills</h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full" />
         </div>
 
         <div ref={gridRef as any} className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {skillCategories.map((cat, i) => (
-            <div
-              key={i}
-              className={`p-5 rounded-2xl border ${cat.border} ${cat.bg} backdrop-blur-sm hover:-translate-y-1 transition-all duration-300 cursor-default reveal-item ${gridVisible ? "revealed" : ""}`}
-              style={{ transitionDelay: gridVisible ? `${i * 50}ms` : "0ms" }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`w-9 h-9 rounded-lg border ${cat.border} flex items-center justify-center`}>
-                  <i className={`${cat.icon} ${cat.color} text-sm`} />
-                </div>
-                <h3 className={`font-semibold text-sm ${cat.color}`}>{cat.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {cat.skills.map((skill, j) => (
-                  <span
-                    key={j}
-                    className="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 text-xs font-medium hover:text-slate-100 hover:border-slate-500 transition-colors"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <SkillCard key={i} cat={cat} i={i} gridVisible={gridVisible} />
           ))}
         </div>
       </div>

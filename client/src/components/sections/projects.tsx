@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { useTilt } from "@/hooks/use-tilt";
 
 const projects = [
   {
@@ -48,72 +49,106 @@ const projects = [
   },
 ];
 
+function ProjectCard({
+  p,
+  i,
+  isActive,
+  gridVisible,
+  onToggle,
+}: {
+  p: (typeof projects)[number];
+  i: number;
+  isActive: boolean;
+  gridVisible: boolean;
+  onToggle: () => void;
+}) {
+  const { ref, onMouseMove, onMouseLeave } = useTilt(8);
+
+  return (
+    <div className="perspective-container">
+      <div
+        ref={ref}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        onClick={onToggle}
+        className={`group tilt-card relative p-7 rounded-3xl border ${p.border} ${p.bg} cursor-pointer transition-[box-shadow] duration-300 reveal-item ${gridVisible ? "revealed" : ""}`}
+        style={{ transitionDelay: gridVisible ? `${i * 80}ms` : "0ms" }}
+      >
+        <div className="tilt-card-content">
+          {/* Top row */}
+          <div className="flex items-start justify-between mb-4">
+            <div className={`icon-3d w-12 h-12 rounded-2xl border ${p.border} flex items-center justify-center`}>
+              <i className={`${p.icon} ${p.color} text-lg`} />
+            </div>
+            <div
+              className="w-8 h-8 rounded-full border border-slate-700/60 flex items-center justify-center transition-transform duration-300"
+              style={{ transform: isActive ? "rotate(45deg)" : "rotate(0deg)" }}
+            >
+              <i className="fas fa-plus text-slate-500 text-xs" />
+            </div>
+          </div>
+
+          <h3 className="text-lg font-bold text-slate-100 mb-0.5">{p.title}</h3>
+          <p className={`text-sm font-medium ${p.color} mb-3`}>{p.subtitle}</p>
+          <p className="text-slate-400 text-sm leading-relaxed mb-5 line-clamp-3">{p.description}</p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {p.tags.map((t, j) => (
+              <span key={j} className="px-2.5 py-1 rounded-md bg-slate-800/70 border border-slate-700/50 text-slate-400 text-xs font-medium">
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* Expandable highlights */}
+          <div
+            className="overflow-hidden transition-all duration-300"
+            style={{ maxHeight: isActive ? "200px" : "0px", opacity: isActive ? 1 : 0 }}
+          >
+            <div className={`pt-4 border-t ${p.border}`}>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Key Highlights</p>
+              <div className="grid grid-cols-2 gap-2">
+                {p.highlights.map((h, j) => (
+                  <div key={j} className="flex items-center gap-2 text-sm text-slate-300">
+                    <i className="fas fa-check-circle text-emerald-400 text-xs" />
+                    {h}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   return (
-    <section id="projects" className="py-24 bg-[#050d1a] relative">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="projects" className="py-24 bg-[#050d1a] relative overflow-hidden">
+      <div className="mesh-gradient" />
+      <div className="max-w-6xl mx-auto px-6 relative">
         <div ref={headerRef as any} className={`mb-16 reveal-item ${headerVisible ? "revealed" : ""}`}>
           <p className="section-label mb-3">What I've built</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-4">Featured Projects</h2>
+          <h2 className="text-3d text-4xl md:text-5xl font-bold text-slate-100 mb-4">Featured Projects</h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full" />
         </div>
 
         <div ref={gridRef as any} className="grid md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
-            <div
+            <ProjectCard
               key={i}
-              onClick={() => setActiveIdx(activeIdx === i ? null : i)}
-              className={`group relative p-7 rounded-3xl border ${p.border} ${p.bg} cursor-pointer hover:-translate-y-1 transition-all duration-300 reveal-item ${gridVisible ? "revealed" : ""}`}
-              style={{ transitionDelay: gridVisible ? `${i * 80}ms` : "0ms" }}
-            >
-              {/* Top row */}
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-12 h-12 rounded-2xl border ${p.border} flex items-center justify-center`}>
-                  <i className={`${p.icon} ${p.color} text-lg`} />
-                </div>
-                <div
-                  className="w-8 h-8 rounded-full border border-slate-700/60 flex items-center justify-center transition-transform duration-300"
-                  style={{ transform: activeIdx === i ? "rotate(45deg)" : "rotate(0deg)" }}
-                >
-                  <i className="fas fa-plus text-slate-500 text-xs" />
-                </div>
-              </div>
-
-              <h3 className="text-lg font-bold text-slate-100 mb-0.5">{p.title}</h3>
-              <p className={`text-sm font-medium ${p.color} mb-3`}>{p.subtitle}</p>
-              <p className="text-slate-400 text-sm leading-relaxed mb-5 line-clamp-3">{p.description}</p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {p.tags.map((t, j) => (
-                  <span key={j} className="px-2.5 py-1 rounded-md bg-slate-800/70 border border-slate-700/50 text-slate-400 text-xs font-medium">
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              {/* Expandable highlights */}
-              <div
-                className="overflow-hidden transition-all duration-300"
-                style={{ maxHeight: activeIdx === i ? "200px" : "0px", opacity: activeIdx === i ? 1 : 0 }}
-              >
-                <div className={`pt-4 border-t ${p.border}`}>
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Key Highlights</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {p.highlights.map((h, j) => (
-                      <div key={j} className="flex items-center gap-2 text-sm text-slate-300">
-                        <i className="fas fa-check-circle text-emerald-400 text-xs" />
-                        {h}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+              p={p}
+              i={i}
+              isActive={activeIdx === i}
+              gridVisible={gridVisible}
+              onToggle={() => setActiveIdx(activeIdx === i ? null : i)}
+            />
           ))}
         </div>
 
